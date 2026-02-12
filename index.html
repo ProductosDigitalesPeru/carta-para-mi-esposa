@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para el Amor de Mi Vida ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+    font-family:'Poppins',sans-serif;
+    background:linear-gradient(to bottom,#0f0f1f,#050510);
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+}
+
+/* ESTRELLAS */
+.stars{
+    position:fixed;
+    width:100%;
+    height:100%;
+    background:
+    radial-gradient(2px 2px at 20% 30%, white, transparent),
+    radial-gradient(2px 2px at 70% 60%, white, transparent),
+    radial-gradient(2px 2px at 40% 80%, white, transparent),
+    radial-gradient(2px 2px at 90% 20%, white, transparent),
+    radial-gradient(2px 2px at 10% 70%, white, transparent);
+    animation:twinkle 3s infinite alternate;
+}
+
+@keyframes twinkle{
+    from{opacity:0.5;}
+    to{opacity:1;}
+}
+
+/* PORTADA */
+.portada{
+    text-align:center;
+    color:white;
+    cursor:pointer;
+}
+
+.portada img{
+    width:140px;
+    margin-bottom:20px;
+}
+
+.portada h1{
+    font-family:'Great Vibes',cursive;
+    font-size:38px;
+}
+
+.portada p{
+    margin-top:10px;
+    opacity:0.8;
+}
+
+/* CARTA */
+.carta{
+    display:none;
+    position:absolute;
+    width:92%;
+    max-width:500px;
+    height:88vh;
+    padding:30px 25px;
+    overflow-y:auto;
+    border-radius:15px;
+    box-shadow:0 20px 60px rgba(0,0,0,0.7);
+    background:
+    repeating-linear-gradient(
+        0deg,
+        #f4e7d3,
+        #f4e7d3 2px,
+        #f1dcc2 2px,
+        #f1dcc2 4px
+    );
+    opacity:0;
+    transition:opacity 1.5s ease;
+}
+
+.carta.mostrar{
+    opacity:1;
+}
+
+.carta h2{
+    font-family:'Great Vibes',cursive;
+    font-size:34px;
+    text-align:center;
+    margin-bottom:20px;
+}
+
+/* BRILLO */
+.brillo{
+    background:linear-gradient(90deg,#000,#ff4d6d,#000);
+    background-size:200%;
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    animation:shine 4s linear infinite;
+}
+
+@keyframes shine{
+    0%{background-position:-200%;}
+    100%{background-position:200%;}
+}
+
+.linea{
+    opacity:0;
+    transform:translateY(20px);
+    animation:aparecer 1s ease forwards;
+    margin-bottom:18px;
+    line-height:1.7;
+    font-size:15px;
+    color:#2b2b2b;
+}
+
+@keyframes aparecer{
+    to{opacity:1;transform:translateY(0);}
+}
+
+.contador{
+    margin-top:20px;
+    text-align:center;
+    font-weight:600;
+    color:#333;
+}
+
+/* CORAZONES */
+.corazon{
+    position:fixed;
+    font-size:20px;
+    animation:flotar 3s linear forwards;
+    pointer-events:none;
+}
+
+@keyframes flotar{
+    to{
+        transform:translateY(-120vh);
+        opacity:0;
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="stars"></div>
+
+<div class="portada" id="portada">
+    <img src="https://cdn-icons-png.flaticon.com/512/833/833472.png">
+    <h1>Una Carta Para el Amor de Mi Vida ❤️</h1>
+    <p>Toca la pantalla para comenzar</p>
+</div>
+
+<div class="carta" id="carta">
+    <h2 class="brillo">Para Emely Perez Rojas ❤️</h2>
+    <div id="contenido"></div>
+    <div class="contador">
+        Nuestro amor comenzó hace:<br>
+        <span id="tiempo"></span>
+    </div>
+</div>
+
+<audio id="musica" src="musica.mp3"></audio>
+
+<script>
+
+const historia=[
+"Te conocí en el instituto, sin imaginar que aquel momento cambiaría mi vida.",
+"El 9 de abril del 2013, entre las 8 y 9 de la noche, con el corazón latiendo fuerte, te pedí que fueras mi novia… y aceptaste.",
+"Esa noche comenzó nuestra historia eterna.",
+"Hemos pasado momentos hermosos y también pruebas difíciles, pero nunca dejamos de elegirnos.",
+"El 17 de septiembre del 2017 nació nuestra hijita hermosa.",
+"Ella es nuestro motivo de vivir y la fuerza que fortalece nuestro amor.",
+"Hoy somos una familia de tres.",
+"Quizá no la más perfecta del mundo…",
+"pero para mí, es todo lo que necesito.",
+"Si pudiera volver a aquella noche de abril, te elegiría una y mil veces más.",
+"Porque lo nuestro no tiene final… solo eternidad."
+];
+
+function iniciarExperiencia(){
+    document.getElementById("musica").play();
+
+    document.getElementById("portada").style.display="none";
+    const carta=document.getElementById("carta");
+    carta.style.display="block";
+    setTimeout(()=>{ carta.classList.add("mostrar"); },100);
+
+    mostrarTexto();
+    crearCorazones();
+
+    document.removeEventListener("click", iniciarExperiencia);
+}
+
+document.addEventListener("click", iniciarExperiencia);
+
+function mostrarTexto(){
+    const contenedor=document.getElementById("contenido");
+    historia.forEach((texto,i)=>{
+        const p=document.createElement("div");
+        p.classList.add("linea");
+        p.style.animationDelay=(i*1.2)+"s";
+        p.innerText=texto;
+        contenedor.appendChild(p);
+    });
+}
+
+function crearCorazones(){
+    for(let i=0;i<20;i++){
+        const corazon=document.createElement("div");
+        corazon.className="corazon";
+        corazon.innerHTML="💖";
+        corazon.style.left=Math.random()*100+"vw";
+        corazon.style.top="100vh";
+        corazon.style.fontSize=(20+Math.random()*30)+"px";
+        document.body.appendChild(corazon);
+        setTimeout(()=>{corazon.remove();},3000);
+    }
+}
+
+const inicio=new Date("2013-04-09T20:30:00");
+
+function actualizar(){
+    const ahora=new Date();
+    const diff=ahora-inicio;
+
+    const dias=Math.floor(diff/(1000*60*60*24));
+    const horas=Math.floor(diff/(1000*60*60))%24;
+    const minutos=Math.floor(diff/(1000*60))%60;
+    const segundos=Math.floor(diff/1000)%60;
+
+    document.getElementById("tiempo").innerHTML=
+    dias+" días "+horas+" horas "+minutos+" minutos "+segundos+" segundos ❤️";
+}
+
+setInterval(actualizar,1000);
+actualizar();
+
+</script>
+
+</body>
+</html>
